@@ -3,8 +3,8 @@
 ## Preprocessing
 
 ```{eval-rst}
-.. module:: transfo___.pp
-.. currentmodule:: transfo___
+.. module:: transfo.pp
+.. currentmodule:: transfo
 
 .. autosummary::
     :toctree: generated
@@ -16,8 +16,8 @@
 ## Tools
 
 ```{eval-rst}
-.. module:: transfo___.tl
-.. currentmodule:: transfo___
+.. module:: transfo.tl
+.. currentmodule:: transfo
 
 .. autosummary::
     :toctree: generated
@@ -28,8 +28,8 @@
 ## Plotting
 
 ```{eval-rst}
-.. module:: transfo___.pl
-.. currentmodule:: transfo___
+.. module:: transfo.pl
+.. currentmodule:: transfo
 
 .. autosummary::
     :toctree: generated

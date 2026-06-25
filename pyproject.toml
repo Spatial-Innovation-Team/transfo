@@ -3,7 +3,7 @@ build-backend = "hatchling.build"
 requires = [ "hatchling" ]
 
 [project]
-name = "transfo---"
+name = "transfo"
 version = "0.0.1"
 description = "Ergonomic in-memory transformations operations  , using NGFF for read/write"
 readme = "README.md"
@@ -127,7 +127,7 @@ run.omit = [
   "**/test_*.py",
 ]
 run.patch = [ "subprocess" ]
-run.source = [ "transfo___" ]
+run.source = [ "transfo" ]
 
 [tool.cruft]
 skip = [
