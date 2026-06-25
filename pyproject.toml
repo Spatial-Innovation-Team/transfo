@@ -5,7 +5,7 @@ requires = [ "hatchling" ]
 [project]
 name = "transfo"
 version = "0.0.1"
-description = "Ergonomic in-memory transformations operations  , using NGFF for read/write"
+description = "Ergonomic in-memory transformations operations , using NGFF for read/write"
 readme = "README.md"
 license = { file = "LICENSE" }
 maintainers = [
@@ -14,10 +14,9 @@ maintainers = [
 authors = [
   { name = "Luca Marconato" },
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
@@ -68,7 +67,7 @@ envs.docs.scripts.open = "python -m webbrowser -t docs/_build/html/index.html"
 envs.docs.dependency-groups = [ "doc" ]
 envs.hatch-test.matrix = [
   # Test the lowest and highest supported Python versions with normal deps
-  { deps = [ "stable" ], python = [ "3.11", "3.14" ] },
+  { deps = [ "stable" ], python = [ "3.12", "3.14" ] },
   # Test the newest supported Python version also with pre-release deps
   { deps = [ "pre" ], python = [ "3.14" ] },
 ]
@@ -81,10 +80,9 @@ envs.hatch-test.dependency-groups = [ "dev", "test" ]
 
 # formatting
 [tool.black]
+target-version = [ "py310", "py312", "py313" ]
 line-length = 79
-target-version = ['py310', 'py311', 'py312', 'py313']
-exclude = '''
-'''
+exclude = ""
 
 # linting
 [tool.ruff]
