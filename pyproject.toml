@@ -37,6 +37,7 @@ dev = [
   "black>=26.5.1",
   "prek",
   "twine>=4.0.2",
+  "ty>=0.0.53",
 ]
 test = [
   "coverage>=7.10",
