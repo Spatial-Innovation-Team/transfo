@@ -80,7 +80,7 @@ envs.hatch-test.dependency-groups = [ "dev", "test" ]
 
 # formatting
 [tool.black]
-target-version = [ "py310", "py312", "py313" ]
+target-version = [ "py312", "py313" ]
 line-length = 79
 exclude = ""
 
