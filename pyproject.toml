@@ -9,9 +9,10 @@ readme = "README.md"
 license = { file = "LICENSE" }
 maintainers = [
   { name = "Luca Marconato", email = "luca.marconato@embl.de" },
-  { name = "Ajayrama Kumaraswamy", email = "ajayrama.kumaraswamy@embl.de" }
+  { name = "Ajayrama Kumaraswamy", email = "ajayrama.kumaraswamy@embl.de" },
+  { name = "Tomaz Vieira", email = "tomaz.vieira@embl.de" },
 ]
-authors = [ { name = "Luca Marconato" }, { name = "Ajayrama.Kumaraswamy" } ]
+authors = [ { name = "Luca Marconato" }, { name = "Ajayrama.Kumaraswamy" }, { name = "Tomaz Vieira" } ]
 requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -27,9 +28,12 @@ dependencies = [
   "graphviz",
   "ome-zarr-models",
   "scverse-misc",
+  "ngff-zarr>=0.37.0",
+  "ome-zarr",
   "session-info2",
   "transformnd",
   "xarray>=2026.4",
+  "yaozarrs>=0.3.1",
 ]
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://transfo---.readthedocs.io/"
@@ -103,6 +107,7 @@ envs.dev.dependency-groups = [ "dev", "test" ]
 [tool.uv]
 sources.ome-zarr-models = { git = "https://github.com/ome-zarr-models/ome-zarr-models-py" }
 sources.transformnd = { git = "https://github.com/clbarnes/transformnd" }
+# sources.ome-zarr = { git = "https://github.com/jo-mueller/ome-zarr-py", branch = "introduce-scene-class" }
 
 # formatting and linting
 [tool.ruff]
