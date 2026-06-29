@@ -56,64 +56,8 @@ def _():
 
 
 @app.cell
-def _(Any, Hashable, TransformGraph, np, xr):
-    class NGFFXarrayCoordinateSystem(xr.indexes.CoordinateTransform):
-        """
-        Adapter class that represents NGFF coordinate systems in xarray.
-
-        Uses ome-zarr-models-py for the coordinate system model and
-        transformnd for path-finding and transform application.
-        """
-
-        def __init__(
-            self,
-            source_name: str,
-            target_name: str,
-            shape: tuple[int, ...],
-            tnd_graph: TransformGraph,
-        ):
-            self.target_coord_system = tnd_graph.coordinate_systems[target_name]
-            try:
-                self.transform_seq = tnd_graph.get_sequence(source_name, target_name)
-                self.inverse_transform_seq = tnd_graph.get_sequence(target_name, source_name)
-            except Exception as exc:
-                raise ValueError(f"No transformation path found from {source_name} to {target_name}.") from exc
-            self.graph = tnd_graph
-            dim_names = [ax.name for ax in self.target_coord_system.axes]
-            dim_shapes = {dim: shape[i] for i, dim in enumerate(dim_names)}
-            super().__init__(
-                coord_names=dim_names,
-                dim_size=dim_shapes,
-                dtype=np.dtype(float),
-            )
-
-        # transformnd.TransformGraph.get_sequence() finds the shortest path
-        def _apply_seq(
-            self, seq, coord_arrays: list
-        ) -> list:  # and chains the edge transforms into a single TransformSequence.
-            """
-            Apply a TransformSequence to a list of per-dimension numpy arrays.
-
-            transformnd expects coordinates as (N, D); we reshape, apply, then
-            reshape back to the original spatial grid shape.
-            """
-            arrs = [np.asarray(a) for a in coord_arrays]
-            shape = arrs[0].shape
-            _coords = np.stack([a.ravel() for a in arrs], axis=1)
-            result = seq.apply(_coords)
-            return [result[:, i].reshape(shape) for i in range(result.shape[1])]
-
-        def forward(self, dim_positions: dict[str, Any]) -> dict[Hashable, Any]:
-            """Perform array -> coordinate system transformation."""
-            pixel = [dim_positions[dim] for dim in self.dims]
-            world = self._apply_seq(self.transform_seq, pixel)
-            return dict(zip(self.coord_names, world, strict=True))
-
-        def reverse(self, coord_labels: dict[Hashable, Any]) -> dict[str, Any]:
-            """Perform coordinate system -> array coordinate reverse transformation."""
-            world = [coord_labels[name] for name in self.coord_names]
-            pixel = self._apply_seq(self.inverse_transform_seq, world)
-            return dict(zip(self.dims, pixel, strict=True))
+def _():
+    from ngff_xarray_index import NGFFXarrayCoordinateSystem
 
     return (NGFFXarrayCoordinateSystem,)
 
@@ -372,9 +316,9 @@ def _(xim_ngff):
 @app.cell
 def _(xim_ngff, xr):
     _query = {
-        "z": xr.DataArray([50.0, 100.0], dims="points"),
-        "y": xr.DataArray([150.0, 300.0], dims="points"),
-        "x": xr.DataArray([60.0, 120.0], dims="points"),
+        "z": xr.DataArray([50.0, 100.0]),
+        "y": xr.DataArray([150.0, 300.0]),
+        "x": xr.DataArray([60.0, 120.0]),
     }
     # pixel (5, 50, 30)  → sheared (50, 150, 60)
     # pixel (10, 100, 60) → sheared (100, 300, 120)
