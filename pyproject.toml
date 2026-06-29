@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "hatchling.build"
-requires = [ "hatch-vcs", "hatchling" ]
+requires = ["hatch-vcs", "hatchling"]
 
 [project]
 name = "transfo"
@@ -11,7 +11,7 @@ maintainers = [
   { name = "Luca Marconato", email = "luca.marconato@embl.de" },
   { name = "Ajayrama Kumaraswamy", email = "ajayrama.kumaraswamy@embl.de" }
 ]
-authors = [ { name = "Luca Marconato" }, { name = "Ajayrama.Kumaraswamy" } ]
+authors = [{ name = "Luca Marconato" }, { name = "Ajayrama.Kumaraswamy" }]
 requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -19,7 +19,7 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
 ]
-dynamic = [ "version" ]
+dynamic = ["version"]
 dependencies = [
   "anndata",
   # for debug logging (referenced from the issue template)
@@ -38,10 +38,10 @@ urls.Source = "https://github.com/Spatial-Innovation-Team/transfo---"
 
 [dependency-groups]
 dev = [
-  "black>=26.5.1",
   "jupyterlab>=4.6",
   "marimo>=0.23.11",
   "matplotlib>=3.11",
+  "pre-commit>=4.6",
   "prek",
   "scipy-stubs~=1.18.0",
   "twine>=4.0.2",
@@ -50,7 +50,7 @@ dev = [
 test = [
   "coverage>=7.10",
   "pytest",
-  "pytest-cov",     # For VS Code’s coverage functionality
+  "pytest-cov", # For VS Code’s coverage functionality
 ]
 doc = [
   "ipykernel",
@@ -72,103 +72,97 @@ version.source = "vcs"
 envs.default.installer = "uv"
 # creating and managing dev env
 envs.default.scripts.create-init-dev-env = "hatch env create dev && hatch run dev:prek-install"
-envs.default.dependency-groups = [ "dev" ]
+envs.default.dependency-groups = ["dev"]
 envs.docs.scripts.build = "sphinx-build -M html docs docs/_build -W {args}"
 envs.docs.scripts.clean = "git clean -fdX -- {args:docs}"
 envs.docs.scripts.open = "python -m webbrowser -t docs/_build/html/index.html"
-envs.docs.dependency-groups = [ "doc" ]
+envs.docs.dependency-groups = ["doc"]
 envs.hatch-test.matrix = [
   # Test the lowest and highest supported Python versions with normal deps
-  { deps = [ "stable" ], python = [ "3.12", "3.14" ] },
+  { deps = ["stable"], python = ["3.12", "3.14"] },
   # Test the newest supported Python version also with pre-release deps
-  { deps = [ "pre" ], python = [ "3.14" ] },
+  { deps = ["pre"], python = ["3.14"] },
 ]
 # If the matrix variable `deps` is set to "pre",
 # set the environment variable `UV_PRERELEASE` to "allow".
 envs.hatch-test.overrides.matrix.deps.env-vars = [
-  { value = "allow", key = "UV_PRERELEASE", if = [ "pre" ] },
+  { value = "allow", key = "UV_PRERELEASE", if = ["pre"] },
 ]
-envs.hatch-test.dependency-groups = [ "dev", "test" ]
+envs.hatch-test.dependency-groups = ["dev", "test"]
 envs.dev.path = ".venv"
 envs.dev.scripts.prek-install = "prek install"
 envs.dev.scripts.prek-run-all-files = "prek run --all-files {args}"
 envs.dev.scripts.prek-run-staged = "prek run {args}"
 envs.dev.scripts.test = "pytest {args}"
 envs.dev.scripts.test-cov = "pytest --cov=transfo --cov-report=term-missing {args}"
-envs.dev.dependency-groups = [ "dev", "test" ]
+envs.dev.dependency-groups = ["dev", "test"]
 
 [tool.uv]
 sources.ome-zarr-models = { git = "https://github.com/ome-zarr-models/ome-zarr-models-py" }
 sources.transformnd = { git = "https://github.com/clbarnes/transformnd" }
 
-# formatting
-[tool.black]
-target-version = [ "py312", "py313" ]
-line-length = 79
-exclude = ""
-
-# linting
+# formatting and linting
 [tool.ruff]
 line-length = 120
-src = [ "src" ]
-extend-include = [ "*.ipynb" ]
+src = ["src"]
+extend-include = ["*.ipynb"]
 fix = true
 format.quote-style = "single"
 format.line-ending = "lf"
 format.docstring-code-format = true
 lint.select = [
-  "A",      # flake8-builtins
-  "ASYNC",  # flake8-async
-  "B",      # flake8-bugbear
-  "BLE",    # flake8-blind-except
-  "C4",     # flake8-comprehensions
-  "COM",    # flake8-commas
-  "D",      # pydocstyle
-  "E",      # Error detected by Pycodestyle
-  "EXE",    # flake8-executable
-  "F",      # Errors detected by Pyflakes
-  "FA",     # flake8-future-annotations
-  "G",      # flake8-logging-format
-  "I",      # isort
-  "ICN",    # flake8-import-conventions
-  "INP",    # flake8-no-pep420
-  "ISC",    # flake8-implicit-str-concat
-  "LOG",    # flake8-logging
+  "A", # flake8-builtins
+  "ASYNC", # flake8-async
+  "B", # flake8-bugbear
+  "BLE", # flake8-blind-except
+  "C4", # flake8-comprehensions
+  "COM", # flake8-commas
+  "D", # pydocstyle
+  "E", # Error detected by Pycodestyle
+  "EXE", # flake8-executable
+  "F", # Errors detected by Pyflakes
+  "FA", # flake8-future-annotations
+  "G", # flake8-logging-format
+  "I", # isort
+  "ICN", # flake8-import-conventions
+  "INP", # flake8-no-pep420
+  "ISC", # flake8-implicit-str-concat
+  "LOG", # flake8-logging
   "NPY201", # numpy 2.0 compatibility
-  "PIE",    # flake8-pie
-  "PT",     # flake8-pytest-style
-  "PYI",    # flake8-pyi
-  "Q",      # flake8-quotes
-  "RET",    # flake8-return
-  "RSE",    # flake8-raise
-  "RUF",    # ruff-specific rules
+  "PIE", # flake8-pie
+  "PT", # flake8-pytest-style
+  "PYI", # flake8-pyi
+  "Q", # flake8-quotes
+  "RET", # flake8-return
+  "RSE", # flake8-raise
+  "RUF", # ruff-specific rules
   "RUF100", # Report unused noqa directives
-  "SIM",    # flake8-simplify
-  "SLOT",   # flake8-slots
-  "T20",    # flake8-print
-  "TC",     # flake8-type-checking
-  "TID",    # flake8-tidy-imports
-  "TRY",    # tryceratops
-  "UP",     # pyupgrade
-  "W",      # Warning detected by Pycodestyle
-  "YTT",    # flake8-2020
+  "SIM", # flake8-simplify
+  "SLOT", # flake8-slots
+  "T20", # flake8-print
+  "TC", # flake8-type-checking
+  "TID", # flake8-tidy-imports
+  "TRY", # tryceratops
+  "UP", # pyupgrade
+  "W", # Warning detected by Pycodestyle
+  "YTT", # flake8-2020
 ]
 lint.ignore = [
-  "B008",   # Errors from function calls in argument defaults. These are fine when the result is immutable.
-  "B028",   # need to be fixed
+  "B008", # Errors from function calls in argument defaults. These are fine when the result is immutable.
+  "B028", # need to be fixed
   "COM819", # conflicts with ruff-format
-  "D100",   # Missing docstring in public module
-  "D104",   # Missing docstring in public package
-  "D105",   # __magic__ methods are often self-explanatory, allow missing docstrings
-  "D107",   # Missing docstring in __init__
+  "D100", # Missing docstring in public module
+  "D104", # Missing docstring in public package
+  "D105", # __magic__ methods are often self-explanatory, allow missing docstrings
+  "D107", # Missing docstring in __init__
   # Disable one in each pair of mutually incompatible rules
-  "D203",   # We don't want a blank line before a class docstring
-  "D213",   # <> We want docstrings to start immediately after the opening triple quote
-  "D400",   # first line should end with a period [Bug: doesn't work with single-line docstrings]
-  "D401",   # First line should be in imperative mood; try rephrasing
-  "E501",   # line too long -> we accept long comment lines; formatter gets rid of long code lines
-  "E731",   # Do not assign a lambda expression, use a def -> lambda expression assignments are convenient
-  "E741",   # allow I, O, l as variable names -> I is the identity matrix
+  "D203", # We don't want a blank line before a class docstring
+  "D213", # <> We want docstrings to start immediately after the opening triple quote
+  "D400", # first line should end with a period [Bug: doesn't work with single-line docstrings]
+  "D401", # First line should be in imperative mood; try rephrasing
+  "E501", # line too long -> we accept long comment lines; formatter gets rid of long code lines
+  "E731", # Do not assign a lambda expression, use a def -> lambda expression assignments are convenient
+  "E741", # allow I, O, l as variable names -> I is the identity matrix
   "ISC001", # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
   "Q000",
   "Q001",
@@ -179,14 +173,14 @@ lint.ignore = [
   "TC001",
   "TC002",
   "TC003",
-  "TC006",  # put types in quotes in typing.cast
+  "TC006", # put types in quotes in typing.cast
   "TRY003", # require implement multiple exception class
   "W191",
 ]
-lint.per-file-ignores."*/__init__.py" = [ "F401" ]
-lint.per-file-ignores."docs/*" = [ "I" ]
-lint.per-file-ignores."tests/*" = [ "D" ]
-lint.flake8-builtins.builtins-allowed-modules = [ "io", "types", "threading" ]
+lint.per-file-ignores."*/__init__.py" = ["F401"]
+lint.per-file-ignores."docs/*" = ["I"]
+lint.per-file-ignores."tests/*" = ["D"]
+lint.flake8-builtins.builtins-allowed-modules = ["io", "types", "threading"]
 # Declare a custom alias for the `matplotlib` module.
 lint.flake8-import-conventions.extend-aliases."dask.array" = "da"
 lint.flake8-import-conventions.extend-aliases.xarray = "xr"
@@ -196,7 +190,7 @@ lint.flake8-quotes.multiline-quotes = "double"
 # Disallow all relative imports.
 lint.flake8-tidy-imports.ban-relative-imports = "all"
 lint.isort.combine-as-imports = true
-lint.isort.known-first-party = [ "transfo" ]
+lint.isort.known-first-party = ["transfo"]
 lint.pydocstyle.convention = "numpy"
 lint.pyupgrade.keep-runtime-typing = true
 
@@ -205,14 +199,14 @@ addopts = [
   "--import-mode=importlib", # allow using test files with same name
 ]
 strict = true
-testpaths = [ "tests" ]
+testpaths = ["tests"]
 
 [tool.coverage]
 run.omit = [
   "**/test_*.py",
 ]
-run.patch = [ "subprocess" ]
-run.source = [ "transfo" ]
+run.patch = ["subprocess"]
+run.source = ["transfo"]
 
 [tool.cruft]
 skip = [
