@@ -44,6 +44,7 @@ dev = [
   "marimo>=0.23.11",
   "matplotlib>=3.11",
   "prek",
+  "scipy-stubs~=1.18.0",
   "twine>=4.0.2",
   "ty>=0.0.53",
 ]
