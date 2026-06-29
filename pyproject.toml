@@ -23,7 +23,13 @@ dynamic = [ "version" ]
 dependencies = [
   "anndata",
   # for debug logging (referenced from the issue template)
+  "dask>=2026.6",
+  "graphviz",
+  "ome-zarr-models",
+  "scverse-misc",
   "session-info2",
+  "transformnd",
+  "xarray>=2026.4",
 ]
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://transfo---.readthedocs.io/"
@@ -32,6 +38,10 @@ urls.Source = "https://github.com/Spatial-Innovation-Team/transfo---"
 
 [dependency-groups]
 dev = [
+  "black>=26.5.1",
+  "jupyterlab>=4.6",
+  "marimo>=0.23.11",
+  "matplotlib>=3.11",
   "prek",
   "twine>=4.0.2",
   "ty>=0.0.53",
@@ -86,7 +96,17 @@ envs.dev.scripts.test = "pytest {args}"
 envs.dev.scripts.test-cov = "pytest --cov=transfo --cov-report=term-missing {args}"
 envs.dev.dependency-groups = [ "dev", "test" ]
 
-# formatting and linting
+[tool.uv]
+sources.ome-zarr-models = { git = "https://github.com/ome-zarr-models/ome-zarr-models-py" }
+sources.transformnd = { git = "https://github.com/clbarnes/transformnd" }
+
+# formatting
+[tool.black]
+target-version = [ "py312", "py313" ]
+line-length = 79
+exclude = ""
+
+# linting
 [tool.ruff]
 line-length = 120
 src = [ "src" ]

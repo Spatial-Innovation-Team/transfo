@@ -28,3 +28,7 @@ uv.lock
 
 # cruft
 .cruft.json
+
+# notebooks
+.ipynb_checkpoints/
+__marimo__/
