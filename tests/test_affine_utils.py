@@ -6,7 +6,7 @@ from transformnd.base import Transform
 from transformnd.transforms import Affine, Scale, Translate
 from transformnd.types import NDims
 
-from transfo._affine_utils import decompose_affine
+from transfo.affine_utils import decompose_affine
 
 
 class _NonAffineTransform(Transform):

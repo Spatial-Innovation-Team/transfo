@@ -23,14 +23,17 @@ classifiers = [
 ]
 dependencies = [
   "anndata",
-  # for debug logging (referenced from the issue template)
   "dask>=2026.6",
   "graphviz",
   "ome-zarr-models",
-  "scverse-misc",
+  "scverse-misc[datasets]",
   "session-info2",
   "transformnd",
   "xarray>=2026.4",
+]
+optional-dependencies.dask = [
+  "dask-image>=2026.5",
+  "scipy",
 ]
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://transfo---.readthedocs.io/"
