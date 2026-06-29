@@ -43,6 +43,7 @@ dev = [
   "jupyterlab>=4.6",
   "marimo>=0.23.11",
   "matplotlib>=3.11",
+  "pre-commit>=4.6",
   "prek",
   "scipy-stubs~=1.18.0",
   "twine>=4.0.2",
