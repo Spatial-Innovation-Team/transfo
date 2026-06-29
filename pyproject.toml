@@ -60,6 +60,8 @@ doc = [
 
 [tool.hatch]
 envs.default.installer = "uv"
+# creating and managing dev env
+envs.default.scripts.create-init-dev-env = "hatch env create dev && hatch run dev:pre-commit-install"
 envs.default.dependency-groups = [ "dev" ]
 envs.docs.scripts.build = "sphinx-build -M html docs docs/_build -W {args}"
 envs.docs.scripts.clean = "git clean -fdX -- {args:docs}"
@@ -77,6 +79,13 @@ envs.hatch-test.overrides.matrix.deps.env-vars = [
   { value = "allow", key = "UV_PRERELEASE", if = [ "pre" ] },
 ]
 envs.hatch-test.dependency-groups = [ "dev", "test" ]
+envs.dev.path = ".venv"
+envs.dev.scripts.lint-format-all-files = "pre-commit run --all-files {args}"
+envs.dev.scripts.lint-format-staged = "pre-commit run {args}"
+envs.dev.scripts.pre-commit-install = "pre-commit install"
+envs.dev.scripts.test = "pytest {args}"
+envs.dev.scripts.test-cov = "pytest --cov=transfo --cov-report=term-missing {args}"
+envs.dev.dependency-groups = [ "dev", "test" ]
 
 # formatting
 [tool.black]
