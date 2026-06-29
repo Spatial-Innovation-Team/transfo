@@ -1,6 +1,6 @@
 import pytest
 
-import transfo___
+import transfo
 
 
 @pytest.mark.skip(reason="This decorator should be removed when test passes.")
@@ -28,7 +28,7 @@ def test_elaborate_example_adata_only_simple(
     expected_len,
     expected_substring,
 ):
-    result = transfo___.pp.elaborate_example(
+    result = transfo.pp.elaborate_example(
         items=[adata], transform=transform, layer_key=layer_key, max_items=max_items
     )
 

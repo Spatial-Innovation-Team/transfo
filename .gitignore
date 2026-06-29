@@ -17,5 +17,14 @@ __pycache__/
 /.coverage*
 
 # docs
-/docs/generated/
-/docs/_build/
+ /docs/generated/
+ /docs/_build/
+
+# IDE files
+.idea/
+
+# uv.lock
+uv.lock
+
+# cruft
+.cruft.json
