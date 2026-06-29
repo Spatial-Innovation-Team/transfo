@@ -1,0 +1,14 @@
+base_url: https://raw.githubusercontent.com/jo-mueller/ngff-rfc5-coordinate-transformation-examples/cdb20ed60b35d441a85041eef079936cd5a895da/3d/simple/
+
+datasets:
+  affine_multiscale:
+    type: zarr_metadata
+    files:
+      - name: zarr.json
+        s3_key: affine_multiscale.zarr/zarr.json
+      - name: s0/zarr.json
+        s3_key: affine_multiscale.zarr/s0/zarr.json
+      - name: s1/zarr.json
+        s3_key: affine_multiscale.zarr/s1/zarr.json
+      - name: s2/zarr.json
+        s3_key: affine_multiscale.zarr/s2/zarr.json
