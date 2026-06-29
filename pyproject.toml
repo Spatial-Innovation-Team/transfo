@@ -33,7 +33,6 @@ urls.Source = "https://github.com/Spatial-Innovation-Team/transfo---"
 
 [dependency-groups]
 dev = [
-  "black>=26.5.1",
   "prek",
   "twine>=4.0.2",
   "ty>=0.0.53",
@@ -87,13 +86,7 @@ envs.dev.scripts.test = "pytest {args}"
 envs.dev.scripts.test-cov = "pytest --cov=transfo --cov-report=term-missing {args}"
 envs.dev.dependency-groups = [ "dev", "test" ]
 
-# formatting
-[tool.black]
-target-version = [ "py312", "py313" ]
-line-length = 79
-exclude = ""
-
-# linting
+# formatting and linting
 [tool.ruff]
 line-length = 120
 src = [ "src" ]
