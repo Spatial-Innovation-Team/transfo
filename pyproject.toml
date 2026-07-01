@@ -33,7 +33,6 @@ urls.Source = "https://github.com/Spatial-Innovation-Team/transfo---"
 
 [dependency-groups]
 dev = [
-  "pre-commit>=4.6",
   "prek",
   "twine>=4.0.2",
   "ty>=0.0.53",
@@ -61,7 +60,7 @@ doc = [
 [tool.hatch]
 envs.default.installer = "uv"
 # creating and managing dev env
-envs.default.scripts.create-init-dev-env = "hatch env create dev && hatch run dev:pre-commit-install"
+envs.default.scripts.create-init-dev-env = "hatch env create dev && hatch run dev:prek-install"
 envs.default.dependency-groups = [ "dev" ]
 envs.docs.scripts.build = "sphinx-build -M html docs docs/_build -W {args}"
 envs.docs.scripts.clean = "git clean -fdX -- {args:docs}"
@@ -80,9 +79,9 @@ envs.hatch-test.overrides.matrix.deps.env-vars = [
 ]
 envs.hatch-test.dependency-groups = [ "dev", "test" ]
 envs.dev.path = ".venv"
-envs.dev.scripts.lint-format-all-files = "pre-commit run --all-files {args}"
-envs.dev.scripts.lint-format-staged = "pre-commit run {args}"
-envs.dev.scripts.pre-commit-install = "pre-commit install"
+envs.dev.scripts.prek-install = "prek install"
+envs.dev.scripts.prek-run-all-files = "prek run --all-files {args}"
+envs.dev.scripts.prek-run-staged = "prek run {args}"
 envs.dev.scripts.test = "pytest {args}"
 envs.dev.scripts.test-cov = "pytest --cov=transfo --cov-report=term-missing {args}"
 envs.dev.dependency-groups = [ "dev", "test" ]
