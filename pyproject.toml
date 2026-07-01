@@ -1,10 +1,9 @@
 [build-system]
 build-backend = "hatchling.build"
-requires = [ "hatchling" ]
+requires = [ "hatch-vcs", "hatchling" ]
 
 [project]
 name = "transfo"
-version = "0.0.1"
 description = "Ergonomic in-memory transformations operations , using NGFF for read/write"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -21,6 +20,7 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
 ]
+dynamic = [ "version" ]
 dependencies = [
   "anndata",
   # for debug logging (referenced from the issue template)
@@ -58,6 +58,7 @@ doc = [
 ]
 
 [tool.hatch]
+version.source = "vcs"
 envs.default.installer = "uv"
 # creating and managing dev env
 envs.default.scripts.create-init-dev-env = "hatch env create dev && hatch run dev:prek-install"

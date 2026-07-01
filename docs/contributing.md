@@ -241,9 +241,11 @@ This means that local testing via hatch and remote testing on CI tests against t
 
 ## Publishing a release
 
-### Updating the version number
+### Creating the release tag
 
-Before making a release, you need to update the version number in the `pyproject.toml` file.
+Before making a release, make sure you have commited, pushed and merged all intended changes. Also make sure that all
+checks and tests are passing. Once ready, locate the branch/commit on GitHub at which the release is to be done and
+create a new tag with the intended version number for the release.
 Please adhere to [Semantic Versioning][semver], in brief
 
 > Given a version number MAJOR.MINOR.PATCH, increment the:
@@ -254,10 +256,10 @@ Please adhere to [Semantic Versioning][semver], in brief
 >
 > Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
-Once you are done, commit and push your changes and navigate to the "Releases" page of this project on GitHub.
-Specify `vX.X.X` as a tag name and create a release.
+Once you are done, navigate to the "Releases" page of this project on GitHub. Click on "Draft a new release"
+Select the tag you just created (`vX.X.X`) and create a release.
 For more information, see [managing GitHub releases][].
-This will automatically create a git tag and trigger a Github workflow that creates a release on [PyPI][].
+This will trigger a Github workflow that creates a release on [PyPI][].
 
 [semver]: https://semver.org/
 [managing GitHub releases]: https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
