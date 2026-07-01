@@ -9,10 +9,9 @@ readme = "README.md"
 license = { file = "LICENSE" }
 maintainers = [
   { name = "Luca Marconato", email = "luca.marconato@embl.de" },
+  { name = "Ajayrama Kumaraswamy", email = "ajayrama.kumaraswamy@embl.de" }
 ]
-authors = [
-  { name = "Luca Marconato" },
-]
+authors = [ { name = "Luca Marconato" }, { name = "Ajayrama.Kumaraswamy" } ]
 requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
