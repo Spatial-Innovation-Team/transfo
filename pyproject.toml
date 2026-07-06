@@ -43,6 +43,7 @@ dev = [
   "matplotlib>=3.11",
   "pre-commit>=4.6",
   "prek",
+  "ruff>=0.15.20",
   "scipy-stubs~=1.18.0",
   "twine>=4.0.2",
   "ty>=0.0.53",
