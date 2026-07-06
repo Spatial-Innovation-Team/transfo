@@ -66,6 +66,9 @@ doc = [
   "sphinxcontrib-katex",
   "sphinxext-opengraph",
 ]
+sandbox = [
+  "pooch[progress]>=1.9", # also loads tqdm for progressbar
+]
 
 [tool.hatch]
 version.source = "vcs"
