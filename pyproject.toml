@@ -23,7 +23,13 @@ dynamic = [ "version" ]
 dependencies = [
   "anndata",
   # for debug logging (referenced from the issue template)
+  "dask>=2026.6",
+  "graphviz",
+  "ome-zarr-models",
+  "scverse-misc",
   "session-info2",
+  "transformnd",
+  "xarray>=2026.4",
 ]
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://transfo---.readthedocs.io/"
@@ -32,7 +38,12 @@ urls.Source = "https://github.com/Spatial-Innovation-Team/transfo---"
 
 [dependency-groups]
 dev = [
+  "jupyterlab>=4.6",
+  "marimo>=0.23.11",
+  "matplotlib>=3.11",
   "prek",
+  "ruff>=0.15.20",
+  "scipy-stubs~=1.18.0",
   "twine>=4.0.2",
   "ty>=0.0.53",
 ]
@@ -54,6 +65,9 @@ doc = [
   "sphinxcontrib-bibtex>=1",
   "sphinxcontrib-katex",
   "sphinxext-opengraph",
+]
+sandbox = [
+  "pooch[progress]>=1.9", # also loads tqdm for progressbar
 ]
 
 [tool.hatch]
@@ -86,11 +100,16 @@ envs.dev.scripts.test = "pytest {args}"
 envs.dev.scripts.test-cov = "pytest --cov=transfo --cov-report=term-missing {args}"
 envs.dev.dependency-groups = [ "dev", "test" ]
 
+[tool.uv]
+sources.ome-zarr-models = { git = "https://github.com/ome-zarr-models/ome-zarr-models-py" }
+sources.transformnd = { git = "https://github.com/clbarnes/transformnd" }
+
 # formatting and linting
 [tool.ruff]
 line-length = 120
 src = [ "src" ]
 extend-include = [ "*.ipynb" ]
+exclude = [ "pyproject.toml" ]
 fix = true
 format.quote-style = "single"
 format.line-ending = "lf"
