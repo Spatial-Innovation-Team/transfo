@@ -41,7 +41,6 @@ dev = [
   "jupyterlab>=4.6",
   "marimo>=0.23.11",
   "matplotlib>=3.11",
-  "pre-commit>=4.6",
   "prek",
   "ruff>=0.15.20",
   "scipy-stubs~=1.18.0",
