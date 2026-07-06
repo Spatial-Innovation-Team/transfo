@@ -95,80 +95,79 @@ fix = true
 format.quote-style = "single"
 format.line-ending = "lf"
 format.docstring-code-format = true
-format.lint.ignore = [
+lint.select = [
+  "A",      # flake8-builtins
+  "ASYNC",  # flake8-async
+  "B",      # flake8-bugbear
+  "BLE",    # flake8-blind-except
+  "C4",     # flake8-comprehensions
+  "COM",    # flake8-commas
+  "D",      # pydocstyle
+  "E",      # Error detected by Pycodestyle
+  "EXE",    # flake8-executable
+  "F",      # Errors detected by Pyflakes
+  "FA",     # flake8-future-annotations
+  "G",      # flake8-logging-format
+  "I",      # isort
+  "ICN",    # flake8-import-conventions
+  "INP",    # flake8-no-pep420
+  "ISC",    # flake8-implicit-str-concat
+  "LOG",    # flake8-logging
+  "NPY201", # numpy 2.0 compatibility
+  "PIE",    # flake8-pie
+  "PT",     # flake8-pytest-style
+  "PYI",    # flake8-pyi
+  "Q",      # flake8-quotes
+  "RET",    # flake8-return
+  "RSE",    # flake8-raise
+  "RUF",    # ruff-specific rules
+  "RUF100", # Report unused noqa directives
+  "SIM",    # flake8-simplify
+  "SLOT",   # flake8-slots
+  "T20",    # flake8-print
+  "TC",     # flake8-type-checking
+  "TID",    # flake8-tidy-imports
+  "TRY",    # tryceratops
+  "UP",     # pyupgrade
+  "W",      # Warning detected by Pycodestyle
+  "YTT",    # flake8-2020
+]
+lint.ignore = [
   "B008",   # Errors from function calls in argument defaults. These are fine when the result is immutable.
+  "B028",   # need to be fixed
+  "COM819", # conflicts with ruff-format
   "D100",   # Missing docstring in public module
   "D104",   # Missing docstring in public package
   "D105",   # __magic__ methods are often self-explanatory, allow missing docstrings
   "D107",   # Missing docstring in __init__
   # Disable one in each pair of mutually incompatible rules
-  "D203",   # We don’t want a blank line before a class docstring
+  "D203",   # We don't want a blank line before a class docstring
   "D213",   # <> We want docstrings to start immediately after the opening triple quote
-  "D400",   # first line should end with a period [Bug: doesn’t work with single-line docstrings]
+  "D400",   # first line should end with a period [Bug: doesn't work with single-line docstrings]
   "D401",   # First line should be in imperative mood; try rephrasing
   "E501",   # line too long -> we accept long comment lines; formatter gets rid of long code lines
   "E731",   # Do not assign a lambda expression, use a def -> lambda expression assignments are convenient
   "E741",   # allow I, O, l as variable names -> I is the identity matrix
-  "TC001",
-  "TC002",
-  "TC003",
-  "COM819", # conflicts with ruff-format
-  "RET504", # not fixed yet https://github.com/charliermarsh/ruff/issues/2950
-  "TRY003", # require implement multiple exception class
-  "RUF005", # problem with numpy compatybility, see https://github.com/charliermarsh/ruff/issues/2142#issuecomment-1451038741
-  "B028",   # need to be fixed
-  "W191",
+  "ISC001", # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
   "Q000",
   "Q001",
   "Q002",
   "Q003",
-  "ISC001", # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+  "RET504", # not fixed yet https://github.com/charliermarsh/ruff/issues/2950
+  "RUF005", # problem with numpy compatybility, see https://github.com/charliermarsh/ruff/issues/2142#issuecomment-1451038741
+  "TC001",
+  "TC002",
+  "TC003",
   "TC006",  # put types in quotes in typing.cast
+  "TRY003", # require implement multiple exception class
+  "W191",
 ]
-format.lint.select = [
-  "B",      # flake8-bugbear
-  "BLE",    # flake8-blind-except
-  "C4",     # flake8-comprehensions
-  "D",      # pydocstyle
-  "E",      # Error detected by Pycodestyle
-  "F",      # Errors detected by Pyflakes
-  "I",      # isort
-  "RUF100", # Report unused noqa directives
-  "TID",    # flake8-tidy-imports
-  "UP",     # pyupgrade
-  "W",      # Warning detected by Pycodestyle
-  "YTT",    # flake8-2020
-  "TC",     # flake8-type-checking
-  "A",      # flake8-builtins
-  "ISC",    # flake8-implicit-str-concat
-  "G",      # flake8-logging-format
-  "PIE",    # flake8-pie
-  "COM",    # flake8-commas
-  "SIM",    # flake8-simplify
-  "INP",    # flake8-no-pep420
-  "PYI",    # flake8-pyi
-  "Q",      # flake8-quotes
-  "RSE",    # flake8-raise
-  "RET",    # flake8-return
-  "TRY",    # tryceratops
-  "ICN",    # flake8-import-conventions
-  "RUF",    # ruff-specific rules
-  "NPY201", # numpy 2.0 compatibility
-  "ASYNC",  # flake8-async
-  "EXE",    # flake8-executable
-  "FA",     # flake8-future-annotations
-  "LOG",    # flake8-logging
-  "SLOT",   # flake8-slots
-  "PT",     # flake8-pytest-style
-  "T20",    # flake8-print
-]
+lint.per-file-ignores."*/__init__.py" = [ "F401" ]
+lint.per-file-ignores."docs/*" = [ "I" ]
+lint.per-file-ignores."tests/*" = [ "D" ]
 lint.flake8-builtins.builtins-allowed-modules = [ "io", "types", "threading" ]
 # Declare a custom alias for the `matplotlib` module.
 lint.flake8-import-conventions.extend-aliases."dask.array" = "da"
-lint.flake8-import-conventions.extend-aliases.lint.per-file-ignores."*/__init__.py" = [ "F401" ]
-lint.flake8-import-conventions.extend-aliases.lint.per-file-ignores."docs/*" = [ "I" ]
-lint.flake8-import-conventions.extend-aliases.lint.per-file-ignores."tests/*" = [ "D" ]
-lint.flake8-import-conventions.extend-aliases.lint.pydocstyle.convention = "numpy"
 lint.flake8-import-conventions.extend-aliases.xarray = "xr"
 lint.flake8-quotes.docstring-quotes = "double"
 lint.flake8-quotes.inline-quotes = "single"
@@ -177,6 +176,7 @@ lint.flake8-quotes.multiline-quotes = "double"
 lint.flake8-tidy-imports.ban-relative-imports = "all"
 lint.isort.combine-as-imports = true
 lint.isort.known-first-party = [ "transfo" ]
+lint.pydocstyle.convention = "numpy"
 lint.pyupgrade.keep-runtime-typing = true
 
 [tool.pytest]
